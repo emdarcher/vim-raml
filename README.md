@@ -1,2 +1,4 @@
 # vim-raml
-RAML syntax plugin for the VIM text editor
+VIM syntax plugin for [RAML](http://raml.org/) files.
+
+
