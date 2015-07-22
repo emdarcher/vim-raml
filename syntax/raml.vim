@@ -14,22 +14,25 @@ syntax match ramlSpecial "\v%^#\%RAML\s+\S+$"
 
 highlight link ramlSpecial Special 
 
-" for user defined 'resources' (correct term?)
-" that start with a '/' and may have curly braces '{' around name '}'
-syntax match ramlResource "\v^\s*/\{=\S+\}="
-
-highlight link ramlResource  Identifier
-
 " for user defined 'items' (correct term?) that end in ':'
-syntax match ramlUserItem "\v^\s*\S+:"
+syntax match ramlUserItem "\v^\s*%[(-\s+)]\S+:"
 
 highlight link ramlUserItem Identifier
 
+" for user defined 'resources' (correct term?)
+" that start with a '/' and may have curly braces '{' around name '}'
+syntax match ramlResource "\v^\s*/\{=\S+\}=%[(/\S+)]:"
+
+highlight link ramlResource Tag
+
+" for user defined 'resourceTypes'
+
+
+
 " header item highlighting
-syntax keyword ramlHeadItem title baseUri version
+syntax keyword ramlHeadItem title baseUri version resourceTypes traits schemas
 
 highlight link ramlHeadItem PreProc
-
 
 
 syntax keyword ramlType string boolean integer float 
@@ -39,24 +42,21 @@ highlight link ramlType Type
 
 syntax match ramlItem "\v^\s*(description|responses|body|example):"
 syntax match ramlItem "\v^\s*(queryParameters|required|type|enum|default):"
-syntax match ramlItem "\v^\s*(formParameters|pattern):"
+syntax match ramlItem "\v^\s*(formParameters|pattern|schema):"
 
 highlight link ramlItem Type
 
+" for HTTP code responses
+syntax match ramlMethodFuncType "\v^\s*\d{3}:"
 
 " method highlighting
 
-syntax match ramlMethodFuncType "\v(get|post|put|delete|patch)"
+syntax match ramlMethodFuncType "\v^\s*(get|post|put|delete|patch)\??:"
+
 
 highlight link ramlMethodFuncType Statement
 
 " constant things {{{
-
-" handling strings (this region regex definition may be incomplete
-" but works in almost all cases)
-syntax region ramlString start=/\v"/ skip=/\v\\./ end=/\v"/  
-
-highlight link ramlString String
 
 " highlighting a text region that starts with a '|' character and newline:
 " This regex pattern works in *most* cases, but doesn't work correctly
@@ -65,8 +65,11 @@ syntax region ramlTextBlock start=/\v\|\s*\n/ end=/\v\ze\n\_^\s*(-\s+)=\S+:\s*$/
 
 highlight link ramlTextBlock String
 
-" an unfinished attempt to select a curly-brace region (json, etc.)
-" syntax region ramlBracedRegion start=/\v\{/ skip=/\v((:\s*\{)|(:\_.))/ end=/\v\}/
+" handling strings (this region regex definition may be incomplete
+" but works in almost all cases)
+syntax region ramlString start=/\v"/ skip=/\v\\./ end=/\v"/  
+
+highlight link ramlString String
 
 " numbers and booleans
 syntax match ramlNumber "\v\d+"
