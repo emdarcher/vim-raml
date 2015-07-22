@@ -9,6 +9,11 @@ endif
 " marks
 syntax match ramlSpecial "\v-*"
 
+" highlight comments
+syntax match ramlComment "\v#.*$"
+
+highlight link ramlComment Comment
+
 " highlighting raml version header
 syntax match ramlSpecial "\v%^#\%RAML\s+\S+$"
 
