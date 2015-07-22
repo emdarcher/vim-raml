@@ -9,15 +9,14 @@ if exists("b:current_syntax")
 endif
 
 
-" marks
-syntax match ramlSpecial "\v-*"
-
 " highlight comments
 syntax match ramlComment "\v#.*$"
-
 highlight link ramlComment Comment
 
-" highlighting raml version header
+" '-' marks
+syntax match ramlSpecial "\v-*"
+
+" highlighting raml version header, only at top of file
 syntax match ramlSpecial "\v%^#\%RAML\s+\S+$"
 
 highlight link ramlSpecial Special 
@@ -62,7 +61,7 @@ syntax match ramlMediaType "\v^\s*\S+/\S+:"
 
 highlight link ramlMediaType Type
 
-" for HTTP code responses
+" for HTTP code responses (3 digits and ':')
 syntax match ramlMethodFuncType "\v^\s*\d{3}:"
 
 " method highlighting
@@ -73,10 +72,9 @@ highlight link ramlMethodFuncType Statement
 " constant things {{{
 
 " highlighting a text region that starts with a '|' character and newline:
-" This regex pattern works in *most* cases, but doesn't work correctly
-" sometimes, so that will have to be fixed somehow
+" BUG: This regex pattern works in *most* cases, but sometimes it highlights 
+" a few lines that follow the text region which shouldn't be highlighted.
 syntax region ramlTextBlock start=/\v\|\s*\n/ end=/\v\ze\n\_^\s*(-\s+)=\S+:\s*$/
-
 highlight link ramlTextBlock String
 
 " handling strings (this region regex definition may be incomplete
