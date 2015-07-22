@@ -21,15 +21,14 @@ highlight link ramlSpecial Special
 " resource highlighting
 " ...
 
-"syntax match ramlUserItem "\v^\s*\S+:"
-"highlight link ramlUserItem Identifier
 
 syntax match ramlResource "\v^\s*/\{=\S+\}="
 
 highlight link ramlResource  Identifier
 
-
-
+syntax match ramlUserItem "\v^\s*\S+:"
+highlight link ramlUserItem Identifier
+"
 " header item highlighting
 " ...
 syntax keyword ramlHeadItem title baseUri version
@@ -41,13 +40,11 @@ highlight link ramlHeadItem PreProc
 syntax keyword ramlType string boolean integer float 
 syntax keyword ramlType number 
 
-syntax match ramlType "\vcollection%[(-item)]" 
-
 highlight link ramlType Type
 
-syntax keyword ramlItem description responses body example
-syntax keyword ramlItem queryParameters required type enum default
-syntax keyword ramlItem formParameters pattern
+syntax match ramlItem "\v^\s*(description|responses|body|example):"
+syntax match ramlItem "\v^\s*(queryParameters|required|type|enum|default):"
+syntax match ramlItem "\v^\s*(formParameters|pattern):"
 
 highlight link ramlItem Type
 
@@ -55,9 +52,11 @@ highlight link ramlItem Type
 " method highlighting
 " ...
 
-syntax keyword ramlMethodFuncType get post put delete patch
+syntax match ramlMethodFuncType "\v(get|post|put|delete|patch)"
 
 highlight link ramlMethodFuncType Statement
+
+
 
 
 " constant things
@@ -72,7 +71,11 @@ syntax region ramlTextBlock start=/\v\|\s*\n/  end=/\v\ze\n\_^\s*(-\s+)=\S+:\s*$
 
 highlight link ramlTextBlock String
 
+syntax match ramlNumber "\v\d+"
+syntax match ramlBoolean "\v(true|false)"
 
+highlight link ramlNumber Number
+highlight link ramlBoolean Boolean
 
 " example highlighting
 " ...
