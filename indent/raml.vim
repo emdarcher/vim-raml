@@ -1,3 +1,7 @@
+" VIM indent file
+" Language: RAML
+" Maintainer: Ethan Durrant
+
 " indentation settings for RAML files
 
 if exists('b:did_indent')

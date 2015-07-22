@@ -1,3 +1,6 @@
+" VIM syntax file
+" Language: RAML
+" Maintainer: Ethan Durrant
 
 " syntax highlighting stuff goes in here
 
