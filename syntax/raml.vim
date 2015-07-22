@@ -25,34 +25,40 @@ syntax match ramlResource "\v^\s*/\{=\S+\}=%[(/\S+)]:"
 
 highlight link ramlResource Tag
 
-" for user defined 'resourceTypes'
-
-
-
 " header item highlighting
-syntax keyword ramlHeadItem title baseUri version resourceTypes traits schemas
+syntax match ramlHeadItem "\v^\s*(title|baseUri|version|resourceTypes):"
+syntax match ramlHeadItem "\v^\s*(securitySchemes|traits|schemas|mediaType):" 
 
 highlight link ramlHeadItem PreProc
 
+syntax match ramlInclude "\v!include"
 
+highlight link ramlInclude Include
+
+" types
 syntax keyword ramlType string boolean integer float 
-syntax keyword ramlType number 
+syntax keyword ramlType number file 
 
 highlight link ramlType Type
 
-syntax match ramlItem "\v^\s*(description|responses|body|example):"
+" different 'items'
+syntax match ramlItem "\v^\s*(description|responses|body|example|is):"
 syntax match ramlItem "\v^\s*(queryParameters|required|type|enum|default):"
-syntax match ramlItem "\v^\s*(formParameters|pattern|schema):"
+syntax match ramlItem "\v^\s*(formParameters|pattern|schema|settings|headers):"
 
 highlight link ramlItem Type
+
+" mediatypes 'application/json' 'binary/octet-stream' etc.
+" something with test split by a single forward slash '/' ending with ':'
+syntax match ramlMediaType "\v^\s*\S+/\S+:"
+
+highlight link ramlMediaType Type
 
 " for HTTP code responses
 syntax match ramlMethodFuncType "\v^\s*\d{3}:"
 
 " method highlighting
-
 syntax match ramlMethodFuncType "\v^\s*(get|post|put|delete|patch)\??:"
-
 
 highlight link ramlMethodFuncType Statement
 
@@ -78,6 +84,19 @@ syntax match ramlBoolean "\v(true|false)"
 highlight link ramlNumber Number
 highlight link ramlBoolean Boolean
 
+" filenames
+syntax match ramlFilename "\v\S+\.\S+"
+
+highlight link ramlFilename Constant 
+
+" urls highlighting underlined
+syntax match ramlUrl "\v\a+://\S+"
+
+highlight link ramlUrl Underlined 
+
+
+" version numbers 'v2' 'v0.1.1' 'a1.5.6' 'b3.4.5' etc.
+syntax match ramlHeadItem "\v(v|b|a|s)\d+%[(\.\w+)]+"
 
 " }}}
 
