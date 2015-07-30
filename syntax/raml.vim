@@ -74,7 +74,7 @@ highlight link ramlMethodFuncType Statement
 " highlighting a text region that starts with a '|' character and newline:
 " BUG: This regex pattern works in *most* cases, but sometimes it highlights 
 " a few lines that follow the text region which shouldn't be highlighted.
-syntax region ramlTextBlock start=/\v\|\s*\n/ end=/\v\ze\n\_^\s*(-\s+)=\S+:\s*$/
+syntax region ramlTextBlock start=/\v\|\s*\n/ end=/\v\ze\n(\s*\n)*\_^\s*(-\s+)=\S+:\s*\|=$/
 highlight link ramlTextBlock String
 
 " handling strings (this region regex definition may be incomplete
