@@ -22,13 +22,15 @@ syntax match ramlSpecial "\v%^#\%RAML\s+\S+$"
 highlight link ramlSpecial Special 
 
 " for user defined 'items' (correct term?) that end in ':'
-syntax match ramlUserItem "\v^\s*%[(-\s+)]\S+:"
+"syntax match ramlUserItem "\v^\s*%[(-\s+)]\S+:"
+syntax match ramlUserItem "\v^\s*(-\s+)=\S+:"
 
 highlight link ramlUserItem Identifier
 
 " for user defined 'resources' (correct term?)
 " that start with a '/' and may have curly braces '{' around name '}'
-syntax match ramlResource "\v^\s*/\{=\S+\}=%[(/\S+)]:"
+"syntax match ramlResource "\v^\s*/\{=\S+\}=%[(/\S+)]:"
+syntax match ramlResource "\v^\s*/\{=\S+\}=(/\S+)=:"
 
 highlight link ramlResource Tag
 
@@ -102,7 +104,8 @@ highlight link ramlUrl Underlined
 
 
 " version numbers 'v2' 'v0.1.1' 'a1.5.6' 'b3.4.5' etc.
-syntax match ramlHeadItem "\v(v|b|a|s)\d+%[(\.\w+)]+"
+"syntax match ramlHeadItem "\v(v|b|a|s)\d+%[(\.\w+)]+"
+syntax match ramlHeadItem "\v(v|b|a|s)\d+(\.\w+)*"
 
 " }}}
 
