@@ -21,6 +21,10 @@ syntax match ramlSpecial "\v%^#\%RAML\s+\S+$"
 
 highlight link ramlSpecial Special 
 
+" highlight comments
+syntax match ramlComment "\v#.*$"
+highlight link ramlComment Comment
+
 " for user defined 'items' (correct term?) that end in ':'
 "syntax match ramlUserItem "\v^\s*%[(-\s+)]\S+:"
 syntax match ramlUserItem "\v^\s*(-\s+)=\S+:"
