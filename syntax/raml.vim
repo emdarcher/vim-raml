@@ -9,21 +9,18 @@ if exists("b:current_syntax")
 endif
 
 
-" highlight comments
-syntax match ramlComment "\v#.*$"
-highlight link ramlComment Comment
-
 " '-' marks
 syntax match ramlSpecial "\v-*"
 
+" highlight comments
+syntax match ramlComment "\v%^{0}#.*$"
+highlight link ramlComment Comment
+
 " highlighting raml version header, only at top of file
-syntax match ramlSpecial "\v%^#\%RAML\s+\S+$"
+syntax match ramlSpecial "\v%^{1}#\%RAML\s+\S+$"
 
 highlight link ramlSpecial Special 
 
-" highlight comments
-syntax match ramlComment "\v#.*$"
-highlight link ramlComment Comment
 
 " for user defined 'items' (correct term?) that end in ':'
 "syntax match ramlUserItem "\v^\s*%[(-\s+)]\S+:"
